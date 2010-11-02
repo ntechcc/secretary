@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Id:</b>
+  <%= @entry.id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @entry.user_id %>
+</p>
+
+<p>
+  <b>Pointer:</b>
+  <%= @entry.pointer %>
+</p>
+
+<p>
+  <b>Reference:</b>
+  <%= @entry.reference %>
+</p>
+
+
+<%= link_to 'Edit', edit_entry_path(@entry) %> |
+<%= link_to 'Back', entries_path %>

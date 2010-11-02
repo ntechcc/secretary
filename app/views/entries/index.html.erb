@@ -1,0 +1,122 @@
+<html>
+<head>
+
+<script type="text/javascript" 
+   src="/javascript/prototype.js">
+</script>
+<script>
+
+function toggleMsg(){
+   $('hide_div').toggle();
+}
+function alertMsg(emptyvar){
+   var qjavascript = $('entry_pointer').value
+   if (emptyvar == '1' && qjavascript.length >= 1){
+   //alert('working'+ emptyvar);
+   $('new_contact').show();
+   $('show_create_div').hide();
+   }
+   else if (emptyvar != '1'){
+   $('new_contact').hide();
+   $('hide_div').show();
+   //alert(emptyvar);
+   }
+   if (qjavascript.length >= 1){
+   //alert(qjavascript);
+   //alert(emptyvar);
+   //$('default_records').toggle();
+   $('default_records').hide();
+   $('display_results').show();
+   $('show_create_div').show();
+   }
+   else{
+   $('default_records').show();
+   $('display_results').hide();
+   $('show_create_div').show();
+   }
+}
+function toggleall(){
+   $('hide_div').hide();
+   $('new_contact').show();
+   $('show_create_div').hide();
+   }
+
+</script>
+</head>
+<%= render 'form' %>
+
+
+<div id=search_indicator_div 
+	style="postition: absolute; left: your_X px; top: your_Y px">
+</div>
+
+
+<%= observe_field(:entry_pointer,
+	:frequency => 0.5,
+	:update => :display_results,
+	:url => { :controller => 'entries', :action => 'search'  }, 
+	:loading => "Element.show('indicator_gif_id')",
+	:complete => "Element.hide('indicator_gif_id')") %>
+
+<div id = "hide_div">
+<span id="display_results"></span>
+
+
+
+
+
+
+<div id = "default_records">
+
+     <div>
+	 <div style = "border:2px;width:100%;">
+	    <% for entry in @entries %>
+	      <div onclick="toggleMsg();"/><div style = "width:100%;background-color:red;text-align:left;">
+		<%= entry.pointer -%>
+		<!--:<%= entry.reference -%>-->
+	      </div></div>
+	    <div>
+		<b>Contact:</b>  <%= entry.pointer -%><br /><br />
+		<b>Info:</b>     <%= entry.reference -%>
+     	    </div>
+
+	<% end %>
+	</div>
+     </div>
+</div>
+</div>
+
+
+
+
+
+
+<!--<h1>Listing entries</h1>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>User</th>
+    <th>Pointer</th>
+    <th>Reference</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @entries.each do |entry| %>
+  <tr>
+    <td><%= entry.id %></td>
+    <td><%= entry.user_id %></td>
+    <td><%= entry.pointer %></td>
+    <td><%= entry.reference %></td>
+    <td><%= link_to 'Show', entry %></td>
+    <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
+    <td><%= link_to 'Destroy', entry, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Entry', new_entry_path %>-->

@@ -1,0 +1,23 @@
+	 <div style = "border:2px;width:100%;">
+	  <% if @results.length  < 1 -%>
+	<!--<div id = "testme2"><% @results[0] -%></div>-->
+	<script>
+        var emptyvar = '1';
+	parent.alertMsg(emptyvar);
+	</script>
+	  <% end -%>
+	</div>
+	<% else -%>
+	    <% for result in @results %>
+	      <div onclick="toggleMsg();" style = "width:100%;background-color:red;text-align:left;">
+		<%= result.pointer -%>
+		<!--:<%= result.reference -%>-->
+	      </div>
+	    <div>
+		<b>Contact:</b>  <%= result.pointer -%><br /><br />
+		<b>Info:</b>     <%= result.reference -%>
+     	    </div>
+
+	<% end %>
+
+
